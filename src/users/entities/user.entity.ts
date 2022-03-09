@@ -42,6 +42,9 @@ export class User {
   @Column({ type: 'int', nullable: true })
   facultyId: number;
 
+  @Column({ type: 'varchar', nullable: true })
+  token: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

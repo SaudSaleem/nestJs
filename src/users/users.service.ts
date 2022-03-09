@@ -55,6 +55,15 @@ export class UsersService {
     return await this.UserRepository.find({ id: id });
   }
 
+  async findUserFaculty(id: number) {
+    return await this.UserRepository.find({
+      where: {
+        id,
+      },
+      relations: ['faculty'],
+    });
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     return await this.UserRepository.update(id, updateUserDto);
   }

@@ -36,6 +36,12 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
+  @Get('/userFaculty/:id')
+  userFaculty(@Param('id') id: string) {
+    console.log('HEELO');
+    return this.usersService.findUserFaculty(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
