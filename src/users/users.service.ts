@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -52,16 +52,31 @@ export class UsersService {
   }
 
   async findOne(id: number) {
-    return await this.UserRepository.find({ id: id });
+    console.log('ID', id);
+    const user = await this.UserRepository.findOne({ id: id });
+    if (!user) {
+      throw new HttpException(
+        'User with given id not found',
+        HttpStatus.NOT_FOUND,
+      );
+      //throw new NotFoundException();
+    }
+    return user;
   }
 
   async findUserFaculty(id: number) {
-    return await this.UserRepository.find({
+    const userFaculty = await this.UserRepository.findOne({
       where: {
         id,
       },
       relations: ['faculty'],
     });
+    if (!userFaculty)
+      throw new HttpException(
+        'User with given id not found',
+        HttpStatus.NOT_FOUND,
+      );
+    return userFaculty;
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
