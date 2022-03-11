@@ -11,7 +11,7 @@ enum UserRole {
   STUDENT = 'Student',
   TEACHER = 'Teacher',
 }
-import { Faculty } from 'src/faculties/entities/faculty.entity';
+import { Faculty } from '../../faculties/entities/faculty.entity';
 
 @Entity()
 export class User {
